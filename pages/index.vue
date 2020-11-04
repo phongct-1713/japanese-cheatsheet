@@ -1,11 +1,13 @@
 <template lang="pug">
-  v-sheet
+  v-sheet.app-content
     v-row(v-for='item, index in data' :key='index')
-      v-col(cols='12').app-title 『 {{ item.title }} 』
+      v-col(cols='12').section-title 『 {{ item.title }} 』
+        span {{ item.subTitle}} Cheatsheet
       v-col(cols='12' md='6' lg='4' v-for='section, sectionIndex in item.section' :key='sectionIndex')
         v-row
-          v-col(cols='12') {{ section.title }}
-          v-col(cols='12')
+          v-col.section-sub-title(cols='12') 「 {{ section.title }} 」
+            span {{ section.subTitle }}
+          v-col.app-box(cols='12')
             p(v-for='letter, letterIndex in section.data' :key='letterIndex') {{ letter.hiragana }}
 
 </template>
@@ -16,10 +18,12 @@ export default {
     return {
       data: {
         hiragana: {
-          title: 'Hiragana',
+          title: 'ひらがな',
+          subTitle: 'Hiragana',
           section: {
             alphabet: {
-              title: 'Alphabet',
+              title: '五十音',
+              subTitle: 'Gojūon',
               data: [
                 {
                   hiragana: 'あ',

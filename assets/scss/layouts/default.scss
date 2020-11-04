@@ -3,6 +3,9 @@
 //////////////////////////////////////////////////
 
 .app-nav {
+  margin: 50px 0 100px;
+  background: transparent !important;
+
   .v-toolbar__content {
     padding: 0;
   }
@@ -12,4 +15,37 @@
   font-size: 12px;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.app-content {
+  background: transparent !important;
+}
+
+.section-title {
+  font-weight: 700;
+  font-size: 40px;
+
+  span {
+    font-size: 30px;
+    font-weight: 500;
+    color: $gray;
+  }
+}
+
+.section-sub-title {
+  font-weight: 700;
+  font-size: 26px;
+  color: $purple;
+  position: relative;
+
+  span {
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+
+.app-box {
+  border-radius: 3px;
+  background: $white;
+  box-shadow: 0 0 2px 2px rgba($black, .1);
 }
