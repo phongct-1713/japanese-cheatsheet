@@ -1,97 +1,114 @@
 <template lang="pug">
-  v-row
-    v-col(cols='12' md='6' lg='4')
-      h2.title Hiragana
-      p(v-for='a, index in alphabet' :key='index')
-        span(v-for='letter, letterIndex in a' :key='letterIndex') {{ letter.Dakuon }}
-    v-col(cols='12' md='6' lg='4') Katakana
-    v-col(cols='12' md='6' lg='4') Kanji
-    ul
-      li(v-for='a, key in alphabet' :key="key") {{ key }}
-    p {{ katakanaToRomaji }}
+  v-sheet
+    v-row(v-for='item, index in data' :key='index')
+      v-col(cols='12').app-title 『 {{ item.title }} 』
+      v-col(cols='12' md='6' lg='4' v-for='section, sectionIndex in item.section' :key='sectionIndex')
+        v-row
+          v-col(cols='12') {{ section.title }}
+          v-col(cols='12')
+            p(v-for='letter, letterIndex in section.data' :key='letterIndex') {{ letter.hiragana }}
+
 </template>
 
 <script>
-import { mapState } from 'vuex'
 export default {
   data() {
     return {
-      katakanaToRomaji: {},
-      hiraganaToRomaji: {},
-      romajiToHiragana: {},
-      romajiToKatakana: {},
-      complexRomajiToHiragana: {},
-      compleRomajiToKatakana: {},
+      data: {
+        hiragana: {
+          title: 'Hiragana',
+          section: {
+            alphabet: {
+              title: 'Alphabet',
+              data: [
+                {
+                  hiragana: 'あ',
+                  romaji: 'a',
+                },
+                {
+                  hiragana: 'い',
+                  romaji: 'i',
+                },
+                {
+                  hiragana: 'う',
+                  romaji: 'u',
+                },
+                {
+                  hiragana: 'え',
+                  romaji: 'e',
+                },
+                {
+                  hiragana: 'お',
+                  romaji: 'o',
+                },
+                {
+                  hiragana: 'か',
+                  romaji: 'ka',
+                },
+                {
+                  hiragana: 'か',
+                  romaji: 'ki',
+                },
+                {
+                  hiragana: 'く',
+                  romaji: 'ku',
+                },
+                {
+                  hiragana: 'け',
+                  romaji: 'ke',
+                },
+                {
+                  hiragana: 'こ',
+                  romaji: 'ko',
+                },
+              ],
+            },
+            yoon: {
+              title: 'Yoon',
+              data: [
+                {
+                  hiragana: 'きゃ',
+                  romaji: 'kya',
+                },
+                {
+                  hiragana: 'きゅ',
+                  romaji: 'kyu',
+                },
+                {
+                  hiragana: 'きょ',
+                  romaji: 'kyo',
+                },
+              ],
+            },
+            dakuon: {
+              title: 'Dakuon',
+              data: [
+                {
+                  hiragana: 'か',
+                  romaji: 'ga',
+                },
+                {
+                  hiragana: 'ぎ',
+                  romaji: 'gi',
+                },
+                {
+                  hiragana: 'ぐ',
+                  romaji: 'gu',
+                },
+                {
+                  hiragana: 'げ',
+                  romaji: 'ge',
+                },
+                {
+                  hiragana: 'ご',
+                  romaji: 'go',
+                },
+              ],
+            },
+          },
+        },
+      },
     }
-  },
-  computed: {
-    ...mapState({
-      alphabet: (state) => state.japanese.alphabet,
-    }),
-  },
-  mounted() {
-    this.simplestAlphabet(this.alphabet)
-    this.SimpleJSON(
-      this.alphabet,
-      this.complexRomajiToHiragana,
-      this.compleRomajiToKatakana
-    )
-    console.table(this.alphabet.k)
-  },
-  methods: {
-    simplestAlphabet(alphabet) {
-      for (const parent in alphabet) {
-        if (Object.prototype.hasOwnProperty.call(alphabet, parent)) {
-          const vowels = alphabet[parent]
-
-          for (const vowel in vowels) {
-            if (Object.prototype.hasOwnProperty.call(vowels, vowel)) {
-              const types = vowels[vowel]
-
-              for (const type in types) {
-                if (Object.prototype.hasOwnProperty.call(types, type)) {
-                  const character = types[type]
-
-                  this.hiraganaToRomaji[character.Hiragana] = character.Romaji
-                  this.katakanaToRomaji[character.Katakana] = character.Romaji
-                  this.romajiToHiragana[character.Romaji] = character.Hiragana
-                  this.romajiToKatakana[character.Romaji] = character.Katakana
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    SimpleJSON(alphabet, complexRomajiToHiragana, compleRomajiToKatakana) {
-      for (const parent in alphabet) {
-        if (Object.prototype.hasOwnProperty.call(alphabet, parent)) {
-          const vowels = alphabet[parent]
-
-          complexRomajiToHiragana[parent] = []
-          compleRomajiToKatakana[parent] = []
-
-          for (const vowel in vowels) {
-            if (Object.prototype.hasOwnProperty.call(vowels, vowel)) {
-              const types = vowels[vowel]
-              for (const type in types) {
-                if (Object.prototype.hasOwnProperty.call(types, type)) {
-                  const character = types[type]
-                  const tmpHiragana = {}
-                  const tmpKatakana = {}
-
-                  tmpHiragana[character.Romaji] = character.Hiragana
-                  tmpKatakana[character.Romaji] = character.Katakana
-
-                  complexRomajiToHiragana[parent].push(tmpHiragana)
-                  compleRomajiToKatakana[parent].push(tmpKatakana)
-                }
-              }
-            }
-          }
-        }
-      }
-    },
   },
 }
 </script>

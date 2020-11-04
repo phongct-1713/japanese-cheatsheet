@@ -1,9 +1,10 @@
 <template lang="pug">
-  v-container
-    v-app-bar(flat dense)
-      v-toolbar-title {{ title }}
-      v-btn(to='/') Cheatsheet
-      v-btn(to='/memorize') Memorize
+  v-container.app
+    v-app-bar.app-nav(flat dense)
+      v-toolbar-title.app-title {{ title }}
+      v-spacer
+      v-btn.mr-5(text to='/') Cheatsheet
+      v-btn.ml-2(text to='/memorize') Memorize
     transition(transition='scroll-y-transition')
       Nuxt
 
