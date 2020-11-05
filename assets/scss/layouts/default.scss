@@ -47,5 +47,28 @@
 .app-box {
   border-radius: 3px;
   background: $white;
-  box-shadow: 0 0 2px 2px rgba($black, .1);
+  box-shadow: 0 0 2px 2px rgba($black, .06);
+
+  &__section {
+    border-bottom: 1px solid rgba($purple, .2);
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      width: 20%;
+      padding: 15px;
+      text-align: center;
+    }
+  }
+
+  &__des {
+    border-bottom: 1px solid rgba($purple, .2);
+    display: flex;
+    flex-wrap: wrap;
+    background: $gray-3;
+
+    p {
+      padding: 15px;
+    }
+  }
 }
